@@ -61,7 +61,7 @@ var invalidData = {
 PersonSchema.validate(invalidData);
 ```
 
-The above throws a `Meteor.Error` with the an `errorType: schemakit` and the
+The above throws a `Meteor.Error` with an `errorType: schemakit` and the
 `details` property set to:
 
 ```javascript
