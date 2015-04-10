@@ -14,7 +14,7 @@ meteor add geekforbrains:schemakit
 Creating A Schema
 -----------------
 
-```
+```javascript
 PersonSchema = new SchemaKit({
   name: {
     type: String,
@@ -51,7 +51,7 @@ PersonSchema = new SchemaKit({
 Validating Data
 ---------------
 
-```
+```javascript
 var invalidData = {
   name: '',
   age: false,
@@ -64,7 +64,7 @@ PersonSchema.validate(invalidData);
 The above throws a `Meteor.Error` with the an `errorType: schemakit` and the
 `details` property set to:
 
-```
+```javascript
 {
   name: Name is required,
   age: Invalid type,
@@ -76,7 +76,7 @@ Notice that the not_in_schema field was stripped (because its not in the schema)
 
 Now legit data.
 
-```
+```javascript
 var legitData = {
   name: 'Foo Bar',
   age: 87,
