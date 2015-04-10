@@ -87,5 +87,5 @@ var legitData = {
 var validatedData = PersonSchema.validate(legitData);
 ```
 
-In the example above, `validatedData` would not contain `not_in_schema` as it
-was stripped automatically.
+In the example above, `validatedData` would have `created_at` set automatically
+and the `not_in_schema` property would be stripped.
