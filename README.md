@@ -61,8 +61,8 @@ var invalidData = {
 PersonSchema.validate(invalidData);
 ```
 
-The above throws a `Meteor.Error` with an `errorType: schemakit` and the
-`details` property set to:
+The above throws a `Meteor.Error` with `error: validation` and the
+`details` property set to the failed fields:
 
 ```javascript
 {

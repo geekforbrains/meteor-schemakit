@@ -47,7 +47,7 @@ SchemaKit.prototype.validate = function(data) {
   }
 
   if(Object.keys(errors).length > 0) {
-    throw new Meteor.Error('schemakit', 'Schema validation failed', errors);
+    throw new Meteor.Error('validation', 'Missing or invalid fields', errors);
   }
 
   return validData;
