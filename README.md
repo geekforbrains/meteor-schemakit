@@ -23,14 +23,14 @@ PersonSchema = new SchemaKit({
   age: {
     type: Number,
     validate: {
-      required: {is: true, message: "Holy shit, you're how old!?"}
+      required: {is: true, message: "Holy shit, you're how old!?"} // custom message example
     }
   },
   email: {
     type: String,
     validate: {
       email: true,
-      custom: function(property) {
+      custom: function(property) { // custom validator example
         if(People.findOne({email: property.value})) {
           property.error = 'Email already in use';
         }
@@ -41,7 +41,7 @@ PersonSchema = new SchemaKit({
   },
   created_at: {
     type: Date,
-    default: function() {
+    default: function() { // default value example
       return new Date();
     }
   }
