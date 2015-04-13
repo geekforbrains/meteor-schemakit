@@ -1,20 +1,26 @@
 SchemaKit = function(schema) {
   var self = this;
   self.schema = schema;
-  self.properties = [];
+  self.properties = {};
 
   _.each(this.schema, function(config, name) {
-    self.properties.push(new SchemaProperty(name, config));
+    self.properties[name] = new SchemaProperty(name, config);
   });
 }
 
+/**
+ * Validate all properties in this schema against the given data.
+ */
 SchemaKit.prototype.validate = function(data) {
   var errors = {};
   var validData = {};
 
   _.each(this.properties, function(property) {
-    if(!property.validate(data)) errors[property.name] = property.error;
-    else validData[property.name] = property.value;
+    try {
+      validData[property.name] = property.validate(data[property.name], data);
+    } catch(e) {
+      errors = _.extend(errors, e.details);
+    }
   });
 
   if(_.size(errors) > 0) {
@@ -22,4 +28,11 @@ SchemaKit.prototype.validate = function(data) {
   }
 
   return validData;
+}
+
+/**
+ * Validate an individual property against a value.
+ */
+SchemaKit.prototype.validateProperty = function(name, value) {
+  return this.properties[name].validate(value);
 }

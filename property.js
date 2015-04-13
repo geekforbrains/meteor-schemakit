@@ -5,10 +5,10 @@ SchemaProperty = function(name, config) {
   this.value = null;
 }
 
-SchemaProperty.prototype.validate = function(data) {
+SchemaProperty.prototype.validate = function(value, data) {
   var self = this;
   self.error = null;
-  self.value = data[self.name];
+  self.value = value;
 
   if(!self.value && _.isFunction(self.config.default)) {
     self.config.default(self, data);
@@ -31,7 +31,13 @@ SchemaProperty.prototype.validate = function(data) {
     });
   }
 
-  return _.isNull(self.error);
+  if(!_.isNull(self.error)) {
+    var details = {}
+    details[self.name] = self.error;
+    throw new Meteor.Error('validation', self.error, details);
+  }
+
+  return self.value;
 }
 
 SchemaProperty.prototype.createMessage = function(message) {

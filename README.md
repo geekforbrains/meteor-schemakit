@@ -98,7 +98,8 @@ The `validatedData` variable would have `created_at` set automatically and the
 To Do
 =====
 
-- ~~make data being validated available to `default` function~~
 - validate array types ex: `type: [String]`
 - fix negative checks ex: `validate: {required: false}`
 - support embedded schemas (ie: sub-schemas)
+- ~~make data being validated available to `default` function~~
+- ~~add method for validating individual properties~~
