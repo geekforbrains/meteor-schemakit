@@ -30,9 +30,9 @@ PersonSchema = new SchemaKit({
     type: String,
     validate: {
       email: true,
-      custom: function(field, value) {
-        if(People.findOne({email: value})) {
-          return 'Email already in use'
+      custom: function(property) {
+        if(People.findOne({email: property.value})) {
+          property.error = 'Email already in use';
         }
       }
     },
@@ -72,9 +72,9 @@ The above throws a `Meteor.Error` with `error: validation` and the
 }
 ```
 
-Notice that the not_in_schema field was stripped (because its not in the schema).
+Notice that the `not_in_schema` field was stripped (because its not defined in the schema).
 
-Now legit data.
+Now, legit data.
 
 ```javascript
 var legitData = {
@@ -87,5 +87,17 @@ var legitData = {
 var validatedData = PersonSchema.validate(legitData);
 ```
 
-In the example above, `validatedData` would have `created_at` set automatically
-and the `not_in_schema` property would be stripped.
+In the example above, the `validate` method succeeds and returns a copy of the
+valid data with any defaults set. This ensures the data you get back matches
+your schema exactly.
+
+The `validatedData` variable would have `created_at` set automatically and the
+`not_in_schema` property would be stripped.
+
+
+To Do
+=====
+
+- ~~make data being validated available to `default` function~~
+- validate array types ex: `type: [String]`
+- fix negative checks ex: `validate: {required: false}`
