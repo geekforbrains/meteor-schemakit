@@ -9,6 +9,6 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   api.use('underscore');
-  api.addFiles(['schemakit.js', 'schemaproperty.js']);
+  api.addFiles(['schemakit.js', 'property.js', 'validations.js']);
   api.export('SchemaKit', ['client', 'server']);
 });
