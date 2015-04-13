@@ -1,3 +1,0 @@
-- make data being validated available to `default` function
-- validate array types ex: `type: [String]`
-- fix negative checks ex: `validate: {required: false}`
