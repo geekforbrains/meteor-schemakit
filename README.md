@@ -62,7 +62,7 @@ PersonSchema.validate(invalidData);
 ```
 
 The above throws a `Meteor.Error` with `error: validation` and the
-`details` property set to the failed fields:
+`details` property set to the failed validations.
 
 ```javascript
 {
@@ -101,3 +101,4 @@ To Do
 - ~~make data being validated available to `default` function~~
 - validate array types ex: `type: [String]`
 - fix negative checks ex: `validate: {required: false}`
+- support embedded schemas (ie: sub-schemas)
