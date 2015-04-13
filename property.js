@@ -1,6 +1,6 @@
-SchemaProperty = function(field, config) {
+SchemaProperty = function(name, config) {
   this.error = null;
-  this.field = field;
+  this.name = name;
   this.config = config;
   this.value = null;
 }
@@ -8,19 +8,19 @@ SchemaProperty = function(field, config) {
 SchemaProperty.prototype.validate = function(data) {
   var self = this;
   self.error = null;
-  self.value = data[self.field];
+  self.value = data[self.name];
 
   if(!self.value && _.isFunction(self.config.default)) {
     self.config.default(self, data);
-  } else if(!self.value) {
+  } else if(!self.value && self.config.default) {
     self.value = self.config.default;
   }
 
   if(self.config.trim) self.value = self.value.trim();
   if(self.config.lowercase) self.value = self.value.toLowerCase();
 
-  if(self.value && !Match.test(self.value, self.type)) {
-    return 'Invalid type';
+  if(self.value && !Match.test(self.value, self.config.type)) {
+    self.error = 'Invalid type';
   } else {
     _.each(self.config.validate, function(option, action) {
       if(_.isNull(self.error)) { // Ignore further checks if error is set
@@ -39,5 +39,5 @@ SchemaProperty.prototype.createMessage = function(message) {
     return str.replace(/\w\S*/g, function(txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
-  })(this.field.replace(/[-_]/g, ' ')) + ' ' + message;
+  })(this.name.replace(/[-_]/g, ' ')) + ' ' + message;
 }

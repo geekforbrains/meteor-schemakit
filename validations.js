@@ -10,6 +10,7 @@ validations = {
   },
 
   email: function(property, bool, message) {
+    console.log('validating email on %s', property.name);
     if(!message) message = property.createMessage('must be a valid email address');
     var pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     if(pattern.test(property.value) !== bool) property.error = message;
