@@ -8,8 +8,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
-  api.addFiles('schemakit.js');
+  api.use('underscore');
+  api.addFiles(['schemakit.js', 'schemaproperty.js']);
   api.export('SchemaKit', ['client', 'server']);
 });
-
-// No tests yet (I'm a baaad, baaad boy)
