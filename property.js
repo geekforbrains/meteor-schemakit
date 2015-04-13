@@ -11,7 +11,7 @@ SchemaProperty.prototype.validate = function(data) {
   self.value = data[self.field];
 
   if(!self.value && _.isFunction(self.config.default)) {
-    self.value = self.config.default(data);
+    self.config.default(self, data);
   } else if(!self.value) {
     self.value = self.config.default;
   }
