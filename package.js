@@ -1,6 +1,6 @@
 Package.describe({
   name: 'geekforbrains:schemakit',
-  version: '0.0.3',
+  version: '0.0.4',
   summary: 'A dead-easy package for validating schemas in Meteor.',
   git: 'https://github.com/geekforbrains/meteor-schemakit',
   documentation: 'README.md'
